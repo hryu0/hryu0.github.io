@@ -73,6 +73,7 @@ nav {
     padding: 3.125em;
     clear: both;
     display: table;
+    text-align: center;
 }
 
 .envBox-container {
@@ -123,7 +124,7 @@ nav {
 }
 
 .w3-cell {
-    padding: 30px;
+    padding: 10px;
 }
 
 .instagram-media {
@@ -131,6 +132,13 @@ nav {
     max-width: 300px;
     min-width: 200px;
     margin-right: 10px;
+}
+
+.slider {
+    white-space: nowrap;
+    overflow-x: visible;
+    height: 500px;
+    overflow-y: hidden;
 }
 
 #qnt {
