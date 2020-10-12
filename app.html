@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+   <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <title></title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo-container">
+        Logo
+      </div>
+      <div class="nav-container">
+        <ul class="nav-list">
+          <li><a href="#mywaste">우리집_음쓰</a></li>
+          <li><a href="#rank">동네_랭킹</a></li>
+          <li><a href="#instagram">지식나눔쓰</a></li>
+          <li><a href="#campaign">함께줄여쓰</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+    <header></header>
+    <main>
+      <div id="mywaste">
+        <div class="container">
+          <h1>우리집 음쓰</h1>
+          <a href="https://www.citywaste.or.kr/portal/status/selectSimpleEmissionQuantity.do">우리집 배출량 조회하러 가기</a>
+          <div class="blank"></div>
+
+          <canvas id="gauge" width="500" height="50"></canvas>
+          <script>
+            var c = document.getElementById("gauge");
+            var lev = c.getContext("2d");
+
+            lev.fillStyle = "#66921b";
+            lev.fillRect(0, 5, 95, 15);
+            lev.fillStyle = "#a9c45e";
+            lev.fillRect(100, 5, 95, 15);
+            lev.fillStyle = "#f9df7b";
+            lev.fillRect(200, 5, 95, 15);
+            lev.fillStyle = "#f9ab00";
+            lev.fillRect(300, 5, 95, 15);
+            lev.fillStyle = "#e2683c";
+            lev.fillRect(400, 5, 95, 15);
+
+            // triangle marker
+            var x = 320;
+            lev.beginPath();
+            lev.moveTo(x, 25);
+            lev.lineTo(x-50, 85);
+            lev.lineTo(x+50, 85);
+            lev.closePath();
+
+            lev.fillStyle = "#00a3e1";
+            lev.fill();
+          </script>
+
+          <h2>음식물쓰레기 무게</h2>
+          <div class="envBox">
+            <form style="float:left">
+              <input type="number" id="qnt"" name="qntInput" value=10 step="any"><span>kg</span>
+            </form>            
+          </div>
+          <div class="equal" style="margin:0">=</div>
+          <div class="large" style="width:30%;float:left">
+            <p id="portion" class="large"></p>
+          </div>
+          
+          <div class="blank"></div>
+          <div class="envBox-container">
+            <h3>온실가스 배출량</h3>
+            <div class="envBox">
+              <img class="icon" src="www/co2.svg" alt="co2">
+              <p id="co2"></p>
+              <p class="unit">kgCO2</p>
+            </div>
+            <div class="equal">=</div>
+            <div class="envBox">
+              <img class="icon" src="www/pine.svg" alt="tree">
+              <p id="tree"></p>
+              <p class="unit">그루</p>
+            </div>
+          </div>
+
+          <div class="envBox-container">
+            <h3>에너지 소비량</h3>
+            <div class="envBox">
+              <img class="icon" src="www/energy.svg" alt="energy">
+              <p id="energy"></p>
+              <p class="unit">kwh</p>
+            </div>
+            <div class="equal">=</div>
+            <div class="envBox">
+              <img class="icon" src="www/washing.svg" alt="washingMachine">
+              <p id="washingMachine"></p>
+              <p class="unit">회 사용</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        var qnt_kg = document.getElementById("qnt").value;
+        document.getElementById("portion").innerHTML = round(qnt_kg/0.719, 1);
+
+        document.getElementById("co2").innerHTML = round(qnt_kg*1.7, 1); 
+        document.getElementById("tree").innerHTML = round(qnt_kg/4.87, 1); 
+        document.getElementById("energy").innerHTML = round(qnt_kg*1.67, 1); 
+        document.getElementById("washingMachine").innerHTML = round(qnt_kg*12, 1); 
+      </script>
+
+      <div id="rank">
+        <div class="container">
+          <h1>동네 랭킹</h1>
+          <div w3-cell-row>
+            <div class="w3-cell">
+              <table class="w3-table w3-bordered w3-centered w3-hoverable w3-card-4">
+                <tr class="w3-blue bold">
+                    <td>아파트</td>
+                    <td>지역</td>
+                    <td>배출량(kg)</td>
+                </tr>
+                <tr>
+                    <td>중구청</td>
+                    <td>대전광역시 중구</td>
+                    <td> 0.0</td>
+                </tr>
+                <tr>
+                    <td>강화군청</td>
+                    <td>인천광역시 강화군</td>
+                    <td> 0.3</td>
+                </tr>
+                <tr>
+                    <td>터미널수거장</td>
+                    <td>인천광역시 강화군</td>
+                    <td> 0.3</td>
+                </tr>
+                <tr>
+                    <td>부산동구청</td>
+                    <td>부산광역시 동구</td>
+                    <td> 1.0</td>
+                </tr>
+                <tr>
+                    <td>대구연경아이파크(BM)</td>
+                    <td>대구광역시 동구</td>
+                    <td> 1.1</td>
+                </tr>
+                <tr>
+                    <td>성남시분당구청</td>
+                    <td>경기도 성남시분당구</td>
+                    <td> 1.3</td>
+                </tr>
+                <tr>
+                    <td>북구청</td>
+                    <td>울산광역시 북구</td>
+                    <td> 1.4</td>
+                </tr>
+                <tr>
+                    <td>중구청</td>
+                    <td>울산광역시 중구</td>
+                    <td> 1.8</td>
+                </tr>
+                <tr>
+                    <td>팔달구청</td>
+                    <td>경기도 수원시팔달구</td>
+                    <td> 2.2</td>
+                </tr>
+                <tr>
+                    <td>영도구청</td>
+                    <td>부산광역시 영도구</td>
+                    <td> 2.7</td>
+                </tr>
+            </table>
+            </div>
+            <div class="w3-cell">
+              <table class="w3-table w3-bordered w3-centered w3-hoverable w3-card-4">
+                <tr class="w3-red bold">
+                    <td>아파트</td>
+                    <td>지역</td>
+                    <td>배출량(kg)</td>
+                </tr>
+                <tr>
+                    <td>잠실파크리오(평아)</td>
+                    <td>서울특별시 송파구</td>
+                    <td>114625.1</td>
+                </tr>
+                <tr>
+                    <td>잠실엘스(크린)</td>
+                    <td>서울특별시 송파구</td>
+                    <td>100538.1</td>
+                </tr>
+                <tr>
+                    <td>리센츠(크린)</td>
+                    <td>서울특별시 송파구</td>
+                    <td> 91853.0</td>
+                </tr>
+                <tr>
+                    <td>화명롯데캐슬카이저</td>
+                    <td>부산광역시 북구</td>
+                    <td> 89958.8</td>
+                </tr>
+                <tr>
+                    <td>올림픽훼밀리타운(녹색)</td>
+                    <td>서울특별시 송파구</td>
+                    <td> 79436.6</td>
+                </tr>
+                <tr>
+                    <td>잠실트리지움(에코)</td>
+                    <td>서울특별시 송파구</td>
+                    <td> 63993.3</td>
+                </tr>
+                <tr>
+                    <td>매탄위브하늘채</td>
+                    <td>경기도 수원시영통구</td>
+                    <td> 62194.9</td>
+                </tr>
+                <tr>
+                    <td>잠실주공5단지(에코)</td>
+                    <td>서울특별시 송파구</td>
+                    <td> 61194.3</td>
+                </tr>
+                <tr>
+                    <td>장미(1.2차)(평아)</td>
+                    <td>서울특별시 송파구</td>
+                    <td> 56989.8</td>
+                </tr>
+                <tr>
+                    <td>SK스카이뷰</td>
+                    <td>인천광역시 미추홀구</td>
+                    <td> 56733.7</td>
+                </tr>
+            </table>
+            </div>
+            <div class="blank"></div>
+            <div>
+              <h2>우리아파트 순위검색</h2>
+              <form autocomplete="on">
+                <label for="aptName">아파트/지자체 이름:</label>
+                <input type="text" id="aptName" name="aptName">
+                <input type="submit" value="찾기">
+                <p>우리 아파트는 XX곳 중 <b style = "font-size: 200%">XX등</b>입니다.</p>
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="instagram">
+        <div class="container">
+          <h1>지식나눔쓰</h1>
+          인스타그램 피드
+        </div>
+      </div>
+
+      <div id="campaign">
+        <div class="container">
+          <h1>함께줄여쓰</h1>
+          <div>
+            <p>음쓰 줄이기, 혼자만의 고독한 싸움..!?! 댓츠노노! 음쓰줄이기 캠페인에 함께 참여해요! (캠페인 내용 추가 필요)</p>
+          </div>
+          <div class="blank"></div>
+          <div>
+            <form>
+              <label for="signName">이름</label>
+              <input type="text" id="signName"" name="signName">
+              <label for="signEmail">이메일</label>
+              <input type="text" id="signEmail"" name="signEmail">
+              <input type="submit" value="참여하기">
+            </form> 
+          </div>
+        </div>
+      </div>
+
+      <div id="about">
+        <div class="container">
+          <h1>About</h1>
+          <p>프로젝트 소개</p>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>
