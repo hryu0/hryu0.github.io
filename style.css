@@ -126,6 +126,18 @@ nav {
     padding: 30px;
 }
 
+.instagram-media {
+    float:left;
+    max-width: 300px;
+    min-width: 200px;
+    margin-right: 10px;
+}
+
+#qnt {
+    width: 300px;
+    text-align: right;
+    font-size: xxx-large;
+}
 #rank {
     background-color: #ffd507
 }
