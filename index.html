@@ -6,7 +6,10 @@
 			  src="https://code.jquery.com/jquery-3.5.1.js"
 			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
-   <script src="script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7GbBgPMT6BgTKdr8a-0cst4Ua5xFi5Bo"></script>
+    <script src="script.js"></script>
+    <script src="heatmap.js"></script>
+    <script src="gmaps-heatmap.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
@@ -122,6 +125,50 @@
 
       <div id="rank">
         <div class="container">
+          <div>
+            <h1>음쓰 핫스팟 지도</h1>
+            <div id="map-canvas" style="width:100%; height:400px"></div>
+            <script>
+              function myMap () {
+                var hotspot = new google.maps.LatLng(37.57257, 126.9796);
+                // map options
+                var myOptions = {
+                  zoom: 10,
+                  center: hotspot
+                };
+                // standard map
+                map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+                // heatmap layer
+                heatmap = new HeatmapOverlay(map,
+                  {
+                    // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+                    "radius": 200,
+                    "maxOpacity": 1,
+                    // scales the radius based on map zoom
+                    "scaleRadius": true,
+                    // if set to false the heatmap uses the global maximum for colorization
+                    // if activated: uses the data maximum within the current map boundaries
+                    //   (there will always be a red spot with useLocalExtremas true)
+                    "useLocalExtrema": true,
+                    // which field name in your data represents the latitude - default "lat"
+                    latField: 'lat',
+                    // which field name in your data represents the longitude - default "lng"
+                    lngField: 'long',
+                    // which field name in your data represents the data value - default "value"
+                    valueField: 'qnt_kg'
+                  }
+                );
+
+                var testData = {
+                  max: 1000,
+                  data: [{"lat":37.5726,"long":126.9796,"qnt_kg":4.3},{"lat":37.6055,"long":126.9605,"qnt_kg":700.5},{"lat":37.5761,"long":126.9575,"qnt_kg":12625.85}]
+                };
+
+                heatmap.setData(testData);
+              }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7GbBgPMT6BgTKdr8a-0cst4Ua5xFi5Bo&callback=myMap"></script>
+          </div>
           <h1>동네 랭킹</h1>
           <div w3-cell-row>
             <div class="w3-cell">
@@ -192,7 +239,7 @@
                     <td>부산광역시 영도구</td>
                     <td> 2.7</td>
                 </tr>
-            </table>
+              </table>
             </div>
             <div class="w3-cell">
               <table class="w3-table w3-bordered w3-centered w3-hoverable w3-card-4">
@@ -262,7 +309,7 @@
                     <td>인천광역시 미추홀구</td>
                     <td> 56733.7</td>
                 </tr>
-            </table>
+              </table>
             </div>
             <div class="blank"></div>
             <div>
@@ -302,9 +349,9 @@
           <div>
             <form>
               <label for="signName">이름</label>
-              <input type="text" id="signName"" name="signName">
+              <input type="text" id="signName" name="signName">
               <label for="signEmail">이메일</label>
-              <input type="text" id="signEmail"" name="signEmail">
+              <input type="text" id="signEmail" name="signEmail">
               <input type="submit" value="참여하기">
             </form> 
           </div>
