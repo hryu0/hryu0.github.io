@@ -14,6 +14,7 @@ h1{
 
 p {
     margin: 0;
+    font-size: 1.4em;
 }
 
 ul {
@@ -87,7 +88,7 @@ nav {
     width: 40%;
     margin-bottom: 0;
     text-align: center;
-    font-size: xx-large;
+    font-size: 1.4em;
 }
 
 .envBox .unit {
