@@ -2,6 +2,7 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script
 			  src="https://code.jquery.com/jquery-3.5.1.js"
 			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -9,46 +10,72 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 
     <title></title>
   </head>
+
   <body onload="convert()">
+
     <nav>
-      <div class="logo-container">
-        Logo
-      </div>
-      <div class="nav-container">
-        <ul class="nav-list">
-          <li><a href="#now">음<b style="color: #f44336">쓰</b>_NOW</a></li>
-          <li><a href="#mywaste">음<b style="color: #f44336">쓰</b>계산기</a></li>
-          <li><a href="#rank">핫<b style="color: #f44336">쓰</b>팟</a></li>
-          <li><a href="#instagram">지식나눔<b style="color: #f44336">쓰</b></a></li>
-          <li><a href="#campaign">함께줄여<b style="color: #f44336">쓰</b></a></li>
-          <li><a href="#about">About</a></li>
-        </ul>
+      <div class="nav-container" id="myNav">
+        <div class="logo-container">
+          <a href="#">음<span class="red">쓰</span>보드</a>
+        </div>
+        <a href="javascript:void(0);" class="menu" onclick="responsiveNav()"><i class="fa fa-bars"></i></a>
+        <div class="w3-bar nav-list">
+          <a href="#now" class="w3-bar-item w3-mobile">음<b class="red">쓰</b>_NOW</a>
+          <a href="#mywaste" class="w3-bar-item w3-mobile">음<b class="red">쓰</b>계산기</a>
+          <a href="#rank" class="w3-bar-item w3-mobile">핫<b class="red">쓰</b>팟</a></li>
+          <a href="#instagram" class="w3-bar-item w3-mobile">지식나눔<b class="red">쓰</b></a>
+          <a href="#campaign" class="w3-bar-item w3-mobile">함께줄여<b class="red">쓰</b></a>
+          <a href="#about" class="w3-bar-item w3-mobile">About</a>
+        </div>
       </div>
     </nav>
+    
     <header></header>
 
     <main>
-      <div id="now">
-        <div class="container">
-          <h1>음쓰 NOW</h1>
-          <span>RFID 시스템을 통해 배출된 음식물쓰레기 총량을 보여줘요</span>
-          <div class="w3-row large">
-            <span style="font-size: 20px">2020년 7월 총 배출량</span> <br>
-            <div class="w3-col m5" id="sum_qnt" style="text-align: right; color:#f44336"></div>
-            <div class="w3-col m1">=</div>
-            <div class="w3-col m5" id="sum_portion" style="text-align: left;"></div>            
+      <div>
+        <div class="container" style="max-width: 80em;">
+          <div class="w3-row intro-container">
+            <div style="font-size: 60px; font-family: Cafe24Ohsquare;">
+              음 <span class="red">쓰</span> 보 드
+            </div>
+            <img id="introBG" src="www/intro.svg" alt="intro">
+            <div id="intro">
+              <p>: 데이터-사람-지구를 잇다.</p>
+              <p style="font-size: 0.8em">RFID 음식물쓰레기 배출정보 기반<br> 음식물쓰레기 모니터링</p>
+            </div>
           </div>
-          <canvas id="monthlyBar" width="500" height="200"></canvas>
+        </div>
+      </div>
+
+      <div id="now" class="yellow">
+        <div class="container">
+          <h1>음<b class="red">쓰</b> NOW</h1>
+          <p>RFID 시스템에 기록된 음식물쓰레기 월별 배출양을 보여줘요</p>
+          <a class="caption" href="https://www.citywaste.or.kr/EgovPageLink.do?link=/ucwmsNew/portal/sysInfo/sysInfo04", target="_blank">RFID 시스템이란?</a>
+          <div class="blank"></div>
+          <div class="w3-row large">
+            <h2>2020년 7월 총 배출량</h2>
+            <div style="max-width: 600px; margin-left: auto; margin-right: auto">
+              <div class="w3-col m12 l5" id="sum_qnt" class="red"></div>
+              <div class="w3-col m12 l2">=</div>
+              <div class="w3-col m12 l5" id="sum_portion"></div>   
+            </div>         
+          </div>
+          <canvas id="monthlyBar"></canvas>
           <script>
             var ctx = document.getElementById('monthlyBar').getContext('2d');
 
             // Global options
             Chart.defaults.global.defaultFontSize = 18;
+            Chart.defaults.global.defaultFontFamily = 'Cafe24Oneprettynight';
 
             var myChart = new Chart(ctx, {
                 type: 'bar',
@@ -104,45 +131,48 @@
           </script>
           
           <div class="blank"></div>
-          <div class="envBox-container">
-            <h3>온실가스 배출량</h3>
-            <div class="envBox">
-              <img class="icon" src="www/co2.svg" alt="co2">
-              <p id="sum_co2"></p>
-              <p class="unit">온실가스 배출량</p>
+          <div class="w3-row">
+            <div class="envBox-container w3-col m12 l6">
+              <h3>온실가스 배출량</h3>
+              <div class="envBox">
+                <img class="icon" src="www/co2.svg" alt="co2">
+                <p id="sum_co2" class="value"></p>
+                <p class="unit">온실가스 배출량</p>
+              </div>
+              <div class="equal">=</div>
+              <div class="envBox">
+                <img class="icon" src="www/pine.svg" alt="tree">
+                <p id="sum_tree" class="value"></p>
+                <p class="unit">소나무 1년 탄소흡수량</p>
+              </div>
             </div>
-            <div class="equal">=</div>
-            <div class="envBox">
-              <img class="icon" src="www/pine.svg" alt="tree">
-              <p id="sum_tree"></p>
-              <p class="unit">소나무 1년 탄소흡수량</p>
-            </div>
-          </div>
 
-          <div class="envBox-container">
-            <h3>에너지 소비량</h3>
-            <div class="envBox">
-              <img class="icon" src="www/energy.svg" alt="energy">
-              <p id="sum_energy"></p>
-              <p class="unit">전기에너지</p>
-            </div>
-            <div class="equal">=</div>
-            <div class="envBox">
-              <img class="icon" src="www/washing.svg" alt="washingMachine">
-              <p id="sum_washingMachine"></p>
-              <p class="unit">세탁기 사용</p>
+            <div class="envBox-container w3-col m12 l6">
+              <h3>에너지 소비량</h3>
+              <div class="envBox">
+                <img class="icon" src="www/energy.svg" alt="energy">
+                <p id="sum_energy" class="value"></p>
+                <p class="unit">전기에너지</p>
+              </div>
+              <div class="equal">=</div>
+              <div class="envBox">
+                <img class="icon" src="www/washing.svg" alt="washingMachine">
+                <p id="sum_washingMachine" class="value"></p>
+                <p class="unit">세탁기 사용</p>
+              </div>
             </div>
           </div>
+        
           <div class="blank"></div>
           <div class="w3-row">
             <h3>처리비용</h3>
-            <div class="w3-col m6">
-              <p>수집/운반 처리비</p>
-              <p id="sum_transCost" style="font-size: xx-large"></p>
+            <div class="w3-col m12 l6">
+              <p class="unit">수집/운반 처리비</p>
+              <p id="sum_transCost" class="value"></p>
             </div>
-            <div class="w3-col m6">
-              <p>처리장 공사비</p>
-              <p id="sum_processCost" style="font-size: xx-large"></p>
+            <div class="w3-col m12 l6">
+              <p class="unit">처리장 공사비</p>
+              <p id="sum_processCost" class="value"></p>
             </div>
           </div>
         </div>
@@ -153,20 +183,20 @@
         document.getElementById("sum_portion").innerHTML = round(sum_qnt_kg/0.719/10**6, 1) + " 백만인분";
 
         document.getElementById("sum_co2").innerHTML = round(sum_qnt_kg*1.7/1000, 1) + " tCO2"; 
-        document.getElementById("sum_tree").innerHTML = round(sum_qnt_kg/4.87/10**6, 1) + " 백만그루"; 
+        document.getElementById("sum_tree").innerHTML = round(sum_qnt_kg/4.87/10**6, 1) + " 백만 그루"; 
         document.getElementById("sum_energy").innerHTML = round(sum_qnt_kg*1.67/10**6, 1) + "GWh"; 
-        document.getElementById("sum_washingMachine").innerHTML = round(sum_qnt_kg*12/10**6, 1) + "백만회"; 
-        document.getElementById("sum_transCost").innerHTML = round(sum_qnt_kg*182/10**8, 1) + "억원"; 
-        document.getElementById("sum_processCost").innerHTML = round(sum_qnt_kg*260000/10**8, 1) + "억원"; 
+        document.getElementById("sum_washingMachine").innerHTML = round(sum_qnt_kg*12/10**6, 1) + "백만 회"; 
+        document.getElementById("sum_transCost").innerHTML = round(sum_qnt_kg*182/10**8, 1) + "억 원"; 
+        document.getElementById("sum_processCost").innerHTML = round(sum_qnt_kg*260000/10**8, 1) + "억 원"; 
       </script>
 
-      <div id="mywaste" class="yellow">
+      <div id="mywaste">
         <div class="container">
-          <h1>음쓰계산기</h1>
+          <h1>음<b class="red">쓰</b>계산기</h1>
           <a href="https://www.citywaste.or.kr/portal/status/selectSimpleEmissionQuantity.do" target="_blank">우리집 배출량 조회하러 가기</a>
           <div class="blank"></div>
 
-          <canvas id="gauge" width="500" height="50"></canvas>
+          <canvas id="gauge"></canvas>
           <script>
             var c = document.getElementById("gauge");
             var lev = c.getContext("2d");
@@ -194,61 +224,68 @@
             lev.fill();
           </script>
 
-          <h3 style="text-align: left">음식물쓰레기 무게</h3>
-          <div>
-            <div class="envBox">
+          <div class="w3-row" style="max-width: 600px; margin-left: auto; margin-right: auto">
+            <h3 style="clear: both; text-align: left; padding-left: 20px">음식물쓰레기 무게</h3>
+            <div class="envBox w3-col m12 l5">
+              
               <form style="float:left">
                 <input type="number" id="qnt" name="qntInput" value=1 step="0.001" oninput="convert()"><span>kg</span>
               </form>            
             </div>
-            <div class="equal" style="margin:0">=</div>
-            <div class="large" style="width:30%;float:left">
+            <div class="equal w3-col m12 l2" style="margin:0">=</div>
+            <div class="large w3-col m12 l5">
               <p id="portion" class="large"></p>
             </div>
           </div>
           
           <div class="blank"></div>
-          <div class="envBox-container">
-            <h3>온실가스 배출량</h3>
-            <div class="envBox">
-              <img class="icon" src="www/co2.svg" alt="co2">
-              <p id="co2"></p>
-              <p class="unit">온실가스 배출량</p>
+
+          <div class="w3-row">
+            <div class="envBox-container w3-col m12 l6">
+              <h3>온실가스 배출량</h3>
+              <div class="envBox">
+                <img class="icon" src="www/co2.svg" alt="co2">
+                <p id="co2" class="value"></p>
+                <p class="unit">온실가스 배출량</p>
+              </div>
+              <div class="equal">=</div>
+              <div class="envBox">
+                <img class="icon" src="www/pine.svg" alt="tree">
+                <p id="tree" class="value"></p>
+                <p class="unit">소나무 1년 탄소흡수량</p>
+              </div>
             </div>
-            <div class="equal">=</div>
-            <div class="envBox">
-              <img class="icon" src="www/pine.svg" alt="tree">
-              <p id="tree"></p>
-              <p class="unit">소나무 1년 탄소흡수량</p>
+
+            <div class="envBox-container w3-col m12 l6">
+              <h3>에너지 소비량</h3>
+              <div class="envBox">
+                <img class="icon" src="www/energy.svg" alt="energy">
+                <p id="energy" class="value"></p>
+                <p class="unit">전기에너지</p>
+              </div>
+              <div class="equal">=</div>
+              <div class="envBox">
+                <img class="icon" src="www/washing.svg" alt="washingMachine">
+                <p id="washingMachine" class="value"></p>
+                <p class="unit">세탁기 사용</p>
+              </div>
             </div>
           </div>
 
-          <div class="envBox-container">
-            <h3>에너지 소비량</h3>
-            <div class="envBox">
-              <img class="icon" src="www/energy.svg" alt="energy">
-              <p id="energy"></p>
-              <p class="unit">전기에너지</p>
-            </div>
-            <div class="equal">=</div>
-            <div class="envBox">
-              <img class="icon" src="www/washing.svg" alt="washingMachine">
-              <p id="washingMachine"></p>
-              <p class="unit">세탁기 사용</p>
-            </div>
-          </div>
           <div class="blank"></div>
+          
           <div class="w3-row">
             <h3>처리비용</h3>
-            <div class="w3-col m6">
-              <p>수집/운반 처리비</p>
-              <p id="transCost" style="font-size: xx-large"></p>
+            <div class="w3-col m12 l6">
+              <p class="unit">수집/운반 처리비</p>
+              <p id="transCost" class="value"></p>
             </div>
-            <div class="w3-col m6">
-              <p>처리장 공사비</p>
-              <p id="processCost" style="font-size: xx-large"></p>
+            <div class="w3-col m12 l6">
+              <p class="unit">처리장 공사비</p>
+              <p id="processCost" class="value"></p>
             </div>
           </div>
+
         </div>
       </div>
       <script>
@@ -265,12 +302,12 @@
         }
       </script>
 
-      <div id="rank">
+      <div id="rank" class="yellow">
         <div class="container">
           <div>
-            <h1>핫쓰팟</h1>
+            <h1>핫<b class="red">쓰</b>팟</h1>
             <p>우리나라 음쓰 '핫스팟(hotspot)'은 어디??</p>
-            <span class="caption">2020년 7월 기준</span>
+            <div class="caption">2020년 7월 기준</div>
             <iframe aria-label="map" id="datawrapper-chart-I5QMY" src="https://datawrapper.dwcdn.net/I5QMY/3/" 
                     scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="538"></iframe>
             <script type="text/javascript">
@@ -282,18 +319,19 @@
                     t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}}))}();
             </script>
           </div>
-          <h2>동네 랭킹</h2>
-          <div w3-cell-row>
-            <div class="w3-cell">
+          <h2>전국 랭킹</h2>
+          <div w3-row>
+            <div class="w3-col m12 l6 padding">
+              <h3>BEST</h3>
               <table class="w3-table w3-bordered w3-centered w3-hoverable w3-card-4">
                 <colgroup>
-                  <col span="1" style="width: 15%;">
+                  <col span="1" style="width: 16%;">
+                  <col span="1" style="width: 32%;">
                   <col span="1" style="width: 30%;">
-                  <col span="1" style="width: 40%;">
-                  <col span="1" style="width: 15%;">
+                  <col span="1" style="width: 22%;">
                 </colgroup>
                 <tbody>
-                  <tr class="w3-blue bold">
+                  <tr class="w3-blue">
                       <td>랭킹</td>
                       <td>아파트</td>
                       <td>지역</td>
@@ -362,16 +400,17 @@
                 </tbody>
               </table>
             </div>
-            <div class="w3-cell">
+            <div class="table w3-col m12 l6 padding">
+              <h3>WORST</h3>
               <table class="w3-table w3-bordered w3-centered w3-hoverable w3-card-4">
                 <colgroup>
-                  <col span="1" style="width: 15%;">
+                  <col span="1" style="width: 16%;">
+                  <col span="1" style="width: 32%;">
                   <col span="1" style="width: 30%;">
-                  <col span="1" style="width: 40%;">
-                  <col span="1" style="width: 15%;">
+                  <col span="1" style="width: 22%;">
                 </colgroup>
                 <tbody>
-                  <tr class="w3-red bold">
+                  <tr class="w3-red">
                     <td>랭킹</td>
                       <td>아파트</td>
                       <td>지역</td>
@@ -449,22 +488,24 @@
                   <option value="seoul">서울특별시</option>
                 </select>
               </form>
-              <div w3-cell-row>
+              <div class="w3-row">
                 <div class="caption">배출량: 2020년 6월 기준 (kg/월/가구)</div>
-                <div class="w3-cell">
+                <div class="caption">*세대수를 입력한 아파트 중 50세대 이상인 아파트를 대상으로 순위를 계산하였습니다.</div>
+                <div class="w3-col m12 l6 padding">
+                  <h3>BEST</h3>
                   <table class="w3-table w3-bordered w3-centered w3-hoverable w3-card-4">
                     <colgroup>
-                      <col span="1" style="width: 15%;">
+                      <col span="1" style="width: 16%;">
+                      <col span="1" style="width: 32%;">
                       <col span="1" style="width: 30%;">
-                      <col span="1" style="width: 40%;">
-                      <col span="1" style="width: 15%;">
+                      <col span="1" style="width: 22%;">
                     </colgroup>
                     <tbody>
-                      <tr class="w3-blue bold">
+                      <tr class="w3-blue">
                           <td>랭킹</td>
                           <td>아파트</td>
                           <td>지역</td>
-                          <td>배출량</td>
+                          <td>배출량<br>(kg/가구)</td>
                       </tr>
                       <tr>
                           <td>1</td>
@@ -529,20 +570,21 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="w3-cell">
+                <div class="w3-col m12 l6 padding">
+                  <h3>WORST</h3>
                   <table class="w3-table w3-bordered w3-centered w3-hoverable w3-card-4">
                     <colgroup>
-                      <col span="1" style="width: 15%;">
+                      <col span="1" style="width: 16%;">
+                      <col span="1" style="width: 32%;">
                       <col span="1" style="width: 30%;">
-                      <col span="1" style="width: 40%;">
-                      <col span="1" style="width: 15%;">
+                      <col span="1" style="width: 22%;">
                     </colgroup>
                     <tbody>
-                      <tr class="w3-red bold">
+                      <tr class="w3-red">
                           <td>랭킹</td>
                           <td>아파트</td>
                           <td>지역</td>
-                          <td>배출량</td>
+                          <td>배출량<br>(kg/가구)</td>
                       </tr>
                       <tr>
                           <td>2172</td>
@@ -616,16 +658,16 @@
                 <label for="aptName">아파트/지자체 이름:</label>
                 <input type="text" id="aptName" name="aptName">
                 <input type="submit" value="찾기">
-                <p>우리 아파트는 XX곳 중 <b style = "font-size: 200%">XX등</b>입니다.</p>
+                <p>서비스 준비 중입니다.</p>
               </form> 
             </div>
           </div>
         </div>
       </div>
 
-      <div id="instagram" class="yellow">
+      <div id="instagram">
         <div class="container" style="max-width: 90%">
-          <h1>지식나눔쓰</h1>
+          <h1>지식나눔<b class="red">쓰</b></h1>
           <p>음쓰 줄이기 노하우를 다같이 나눠요! 인스타그램 <b>@umssu0</b> 팔로우하고 <b class="w3-blue">#음쓰팁쓰</b> 태그하면 공유 끝:)</p>
           <div class="slider">
             <script async src="//www.instagram.com/embed.js"></script>
@@ -641,7 +683,7 @@
         <div class="container">
           <h1>함께줄여쓰</h1>
           <div>
-            <p>음쓰 줄이기, 혼자만의 고독한 싸움..!?! 댓츠노노! 음쓰줄이기 캠페인에 함께 참여해요! (캠페인 내용 추가 필요)</p>
+            <p>음쓰 줄이기, 혼자만의 고독한 싸움..!?! 댓츠노노! 음쓰줄이기 캠페인에 함께 참여해요!</p>
           </div>
           <div class="blank"></div>
           <div>
@@ -657,25 +699,45 @@
       </div>
 
       <div id="about" class="yellow">
-        <div class="container" style="text-align: left">
+        <div class="container">
           <h1>About</h1>
-          <p>음쓰보드는 음식물쓰레기가 지구와 우리에게 미치는 영향에 대해 체감하고, 스스로 배출량을 살피고, 함께 줄여나가는 사회를 지향합니다.</p>
-          <div class="blank"></div>
-          <p>하나. 음쓰보드는 음식물쓰레기 문제에는 공감하지만, 그 “양”에 대해 체감하지 못하는 우리를 위하여 개개인의 관심사를 고려한 다양한 정보로서 음식물쓰레기 배출량을 환산하여 시각화합니다.</p>
-          <br><br>
-          <p>둘. 음쓰보드는 음식물쓰레기를 줄이고 싶은 마음은 굴뚝같지만 그 시작이 어렵거나, 구체적인 방법을 모르는 우리를 위하여 실천사례, 쉬운 방법 등 음쓰 저감을 위한 다양한 정보를 실시간 제공하고자 합니다.</p>
-          <br><br>
-          <p>셋. 음쓰보드는 음식물쓰레기를 줄이기 위해 모은 의견을 토대로 5대 실천 약속을 정하고, 지킬 수 있는 약속을 선택하고 서명하는 함께줄여쓰 캠페인을 전개합니다.</p>
           <div>
+           <p><span style="font-size: x-large">음쓰보드</span>는 음식물쓰레기가 지구와 우리에게 미치는 <span class="emph">영향을 체감</span>하고, 
+            스스로 <span class="emph">배출량을 살피고</span>, <span class="emph">함께 줄여</span>나가는 사회를 지향합니다.</p>
+            <br>
+            <table class="textTable">
+              <colgroup>
+                <col span="1" style="width: 55px;">
+                <col span="1">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <td>하나.</td>
+                  <td>음식물쓰레기 문제에는 공감하지만, 그 <span class="emph">양을 체감하지 못하는</span> 우리를 위해, 개개인의 
+                    관심사를 고려해 음식물쓰레기 배출량을 <span class="emph">다양하게 환산하고 시각화</span>합니다.</td>
+                </tr>
+                <tr>
+                  <td>둘.</td>
+                  <td>음식물쓰레기를 줄이고 싶은 <span class="emph">마음은 굴뚝같지만</span> 그 시작이 어렵거나, 구체적인 방법을 모르는 
+                    우리를 위해, 음쓰에 대한 <span class="emph">다양한 정보를 실시간으로 서로 공유</span>할 수 있도록 합니다.</td>
+                </tr>
+                <tr>
+                  <td>셋.</td>
+                  <td>음식물쓰레기를 줄이기 위한 <span class="emph">실천 약속</span>을 정하고 실천하는 <span class="emph">캠페인</span>을 
+                    전개합니다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="container" sty>
+          <div style="text-align: left">
             데이터 출처:
             <a href="https://www.bigdata-environment.kr/" target="_blank">envbigdata</a>,
             <a href="https://data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=3045421" target="_blank">공공데이터포털</a>,
             <a href="https://www.kwater.or.kr/main.do?s_mid=1" target="_blank">K water</a>,
           </div>
-        </div>
-
-        
-        <div class="container">
           <p>contact: umssu@pm.me</p>
         </div>
       </div>
