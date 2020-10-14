@@ -142,17 +142,19 @@ nav {
     overflow-y: hidden;
 }
 
+.caption {
+    text-align: right;
+    font-size: 0.8em;
+}
+
+.yellow {
+    background-color: #ffd507
+}
+
 #qnt {
     width: 300px;
     text-align: right;
     font-size: xxx-large;
-}
-#rank {
-    background-color: #ffd507
-}
-
-#campaign {
-    background-color: #ffd507
 }
 
 #gauge {
