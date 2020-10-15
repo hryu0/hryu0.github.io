@@ -132,7 +132,7 @@ nav {
     top: 20;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
     .nav-container .w3-bar {display: none;}
     .nav-container .menu {
       float: right;
@@ -140,8 +140,14 @@ nav {
     }
 }
   
-@media screen and (max-width: 600px) {
-    .nav-container.responsive .w3-bar {display: block; background-color: rgba(255, 255, 255, 1)}
+@media screen and (max-width: 750px) {
+    .nav-container.responsive .w3-bar {
+        display: block;
+        background-color: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        top: 55px;
+        left: 0;
+    }
     .nav-container.responsive .menu {
       right: 0;
       top: 0;
@@ -257,6 +263,12 @@ nav {
     max-height: 350px;
 }
 
+#title {
+    min-width: 380px;
+    font-size: 60px; 
+    font-family: 'Cafe24Ohsquare';
+}
+
 #introBG {
     z-index: -2;
     position: relative;
@@ -275,7 +287,7 @@ nav {
 }
 
 @media screen and (max-width: 600px) {
-    .w3-row.intro-container {
+    .w3-row .intro-container {
         max-height: 40vw;
     }
 
