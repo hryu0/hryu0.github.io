@@ -182,7 +182,7 @@
         document.getElementById("sum_qnt").innerHTML = round(sum_qnt_kg/1000, 1) + " 톤";
         document.getElementById("sum_portion").innerHTML = round(sum_qnt_kg/0.719/10**6, 1) + " 백만인분";
 
-        document.getElementById("sum_co2").innerHTML = round(sum_qnt_kg*1.7/1000, 1) + " tCO2"; 
+        document.getElementById("sum_co2").innerHTML = round(sum_qnt_kg*1.7/1000, 1) + " tCO2eq."; 
         document.getElementById("sum_tree").innerHTML = round(sum_qnt_kg/4.87/10**6, 1) + " 백만 그루"; 
         document.getElementById("sum_energy").innerHTML = round(sum_qnt_kg*1.67/10**6, 1) + "GWh"; 
         document.getElementById("sum_washingMachine").innerHTML = round(sum_qnt_kg*12/10**6, 1) + "백만 회"; 
@@ -293,7 +293,7 @@
           var qnt_kg = document.getElementById("qnt").value;
         document.getElementById("portion").innerHTML = round(qnt_kg/0.719, 1) + " 인분";
 
-        document.getElementById("co2").innerHTML = round(qnt_kg*1.7, 1) + " kgCO2"; 
+        document.getElementById("co2").innerHTML = round(qnt_kg*1.7, 1) + " kgCO2eq."; 
         document.getElementById("tree").innerHTML = round(qnt_kg/4.87, 1) + " 그루"; 
         document.getElementById("energy").innerHTML = round(qnt_kg*1.67, 1) + "kwh"; 
         document.getElementById("washingMachine").innerHTML = round(qnt_kg*12, 1) + "회"; 
